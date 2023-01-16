@@ -1,0 +1,43 @@
+﻿@page
+@model Proiect1.Pages.CompaniiAeriene.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>CompanieAeriana</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CompanieAeriana.Nume_Airline)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CompanieAeriana.Nume_Airline)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CompanieAeriana.Tara)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CompanieAeriana.Tara)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CompanieAeriana.CallCenter)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CompanieAeriana.CallCenter)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CompanieAeriana.EmailContact)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CompanieAeriana.EmailContact)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.CompanieAeriana?.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

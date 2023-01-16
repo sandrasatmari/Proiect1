@@ -1,0 +1,58 @@
+﻿@page
+@model Proiect1.Pages.Zboruri.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Zbor</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Zbor.DataPlecare)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Zbor.DataPlecare)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Zbor.NrLocuri)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Zbor.NrLocuri)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Zbor.NrLocuriRezervate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Zbor.NrLocuriRezervate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Zbor.Poarta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Zbor.Poarta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Zbor.OreIntarziere)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Zbor.OreIntarziere)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Zbor.Destinatie)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Zbor.Destinatie)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Zbor.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
