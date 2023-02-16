@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Proiect1.Data;
 using Proiect1.Models;
-using Proiect1.Models.ViewModels;
 
-namespace Proiect1.Pages.CompaniiAeriene
+namespace Proiect1.Pages.Porti
 {
     public class IndexModel : PageModel
     {
@@ -20,14 +19,13 @@ namespace Proiect1.Pages.CompaniiAeriene
             _context = context;
         }
 
-        public IList<CompanieAeriana> CompanieAeriana { get; set; } = default!;
+        public IList<Poarta> Poarta { get;set; } = default!;
 
-        
         public async Task OnGetAsync()
         {
-            if (_context.CompanieAeriana != null)
+            if (_context.Poarta != null)
             {
-                CompanieAeriana = await _context.CompanieAeriana.ToListAsync();
+                Poarta = await _context.Poarta.ToListAsync();
             }
         }
     }

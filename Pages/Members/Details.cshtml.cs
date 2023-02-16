@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Proiect1.Data;
 using Proiect1.Models;
 
-namespace Proiect1.Pages.Zboruri
+namespace Proiect1.Pages.Members
 {
     public class DetailsModel : PageModel
     {
@@ -19,24 +19,23 @@ namespace Proiect1.Pages.Zboruri
             _context = context;
         }
 
-      public Zbor Zbor { get; set; }
+      public Member Member { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-
-            if (id == null || _context.Zbor == null)
+            if (id == null || _context.Member == null)
             {
                 return NotFound();
             }
 
-            var zbor = await _context.Zbor.FirstOrDefaultAsync(m => m.Id == id);
-            if (zbor == null)
+            var member = await _context.Member.FirstOrDefaultAsync(m => m.ID == id);
+            if (member == null)
             {
                 return NotFound();
             }
             else 
             {
-                Zbor = zbor;
+                Member = member;
             }
             return Page();
         }

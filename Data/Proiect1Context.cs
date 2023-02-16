@@ -21,5 +21,9 @@ namespace Proiect1.Data
         public DbSet<Proiect1.Models.CompanieAeriana> CompanieAeriana { get; set; }
 
         public DbSet<Proiect1.Models.CompanieZbor> CompanieZbor { get; set; }
+
+        public DbSet<Proiect1.Models.Poarta> Poarta { get; set; }
+
+        public DbSet<Proiect1.Models.Member> Member { get; set; }
     }
 }

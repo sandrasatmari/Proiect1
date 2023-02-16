@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect1.Data;
 
@@ -11,13 +12,14 @@ using Proiect1.Data;
 namespace Proiect1.Migrations
 {
     [DbContext(typeof(Proiect1Context))]
-    partial class Proiect1ContextModelSnapshot : ModelSnapshot
+    [Migration("20230216174711_mimi")]
+    partial class mimi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -76,9 +78,7 @@ namespace Proiect1.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("MemberID")
-                        .IsUnique()
-                        .HasFilter("[MemberID] IS NOT NULL");
+                    b.HasIndex("MemberID");
 
                     b.ToTable("CompanieAeriana");
                 });
@@ -194,11 +194,11 @@ namespace Proiect1.Migrations
 
             modelBuilder.Entity("Proiect1.Models.CompanieAeriana", b =>
                 {
-                    b.HasOne("Proiect1.Models.Member", "Members")
-                        .WithOne("companieAeriana")
-                        .HasForeignKey("Proiect1.Models.CompanieAeriana", "MemberID");
+                    b.HasOne("Proiect1.Models.Member", "Member")
+                        .WithMany("CompaniiAeriene")
+                        .HasForeignKey("MemberID");
 
-                    b.Navigation("Members");
+                    b.Navigation("Member");
                 });
 
             modelBuilder.Entity("Proiect1.Models.CompanieZbor", b =>
@@ -245,8 +245,7 @@ namespace Proiect1.Migrations
 
             modelBuilder.Entity("Proiect1.Models.Member", b =>
                 {
-                    b.Navigation("companieAeriana")
-                        .IsRequired();
+                    b.Navigation("CompaniiAeriene");
                 });
 
             modelBuilder.Entity("Proiect1.Models.Poarta", b =>

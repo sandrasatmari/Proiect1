@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:int?}"
 @model Proiect1.Pages.Aeroporturi.IndexModel
 
 @{
@@ -26,8 +26,14 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Aeroport) {
-        <tr>
+        @foreach (var item in Model.AeroportData.Aeroporturi)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.AeroportID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
             <td>
                 @Html.DisplayFor(modelItem => item.Nume_Aeroport)
             </td>
@@ -38,6 +44,7 @@
                 @Html.DisplayFor(modelItem => item.Tara)
             </td>
             <td>
+                <a asp-page="./Index" asp-route-id="@item.ID">Select</a> |
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
@@ -46,3 +53,37 @@
 }
     </tbody>
 </table>
+
+@if (Model.AeroportData.Zboruri != null)
+{
+    <h3>Zboruri spre anumite aeroporturi</h3>
+    <table class="table">
+
+        @foreach (var item in Model.AeroportData.Aeroporturi)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.AeroportID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+
+                <td>
+                    @{
+                        foreach (var b in Model.AeroportData.Zboruri)
+                        {
+                            if(b.Destinatie == item.ID)
+                            {
+                                @b.NrLocuriRezervate @: @b.Poarta.Numar @b.DataPlecare
+                                <br />
+
+                            }
+
+                            
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}

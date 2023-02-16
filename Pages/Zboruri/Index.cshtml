@@ -3,7 +3,7 @@
 
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Zboruri";
 }
 
 <h1>Index</h1>
@@ -11,6 +11,16 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Destination Airport / Flight Gate:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -24,21 +34,34 @@
                 @Html.DisplayNameFor(model => model.Zbor[0].NrLocuriRezervate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Zbor[0].Poarta)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.PoartaSort">
+                @Html.DisplayNameFor(model => model.Zbor[0].PoartaID)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Zbor[0].OreIntarziere)
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DestinatieSort">
                 @Html.DisplayNameFor(model => model.Zbor[0].Destinatie)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zbor[0].CompaniiZbor)
             </th>
 
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Zbor) {
-        <tr>
+@foreach (var item in Model.ZborD.Zboruri) {
+    string selectedRow = "";
+        if (item.Id == Model.ZborID)
+        {
+            selectedRow = "table-success";
+        }
+        <tr class="@selectedRow">
+        
             <td>
                 @Html.DisplayFor(modelItem => item.DataPlecare)
             </td>
@@ -49,7 +72,7 @@
                 @Html.DisplayFor(modelItem => item.NrLocuriRezervate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Poarta)
+                @Html.DisplayFor(modelItem => item.PoartaID)    
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OreIntarziere)
@@ -57,6 +80,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Destinatie)
             </td>
+                <td>
+                    @{
+                        foreach (var companieAeriana in item.CompaniiZbor)
+                        {
+                            @companieAeriana.CompanieAeriana.ID @: @companieAeriana.CompanieAeriana.Nume_Airline <br />
+                        }
+                    }
+                </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |

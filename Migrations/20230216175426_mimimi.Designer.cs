@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect1.Data;
 
@@ -11,9 +12,10 @@ using Proiect1.Data;
 namespace Proiect1.Migrations
 {
     [DbContext(typeof(Proiect1Context))]
-    partial class Proiect1ContextModelSnapshot : ModelSnapshot
+    [Migration("20230216175426_mimimi")]
+    partial class mimimi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,9 +78,7 @@ namespace Proiect1.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("MemberID")
-                        .IsUnique()
-                        .HasFilter("[MemberID] IS NOT NULL");
+                    b.HasIndex("MemberID");
 
                     b.ToTable("CompanieAeriana");
                 });
@@ -195,8 +195,8 @@ namespace Proiect1.Migrations
             modelBuilder.Entity("Proiect1.Models.CompanieAeriana", b =>
                 {
                     b.HasOne("Proiect1.Models.Member", "Members")
-                        .WithOne("companieAeriana")
-                        .HasForeignKey("Proiect1.Models.CompanieAeriana", "MemberID");
+                        .WithMany("CompaniiAeriene")
+                        .HasForeignKey("MemberID");
 
                     b.Navigation("Members");
                 });
@@ -245,8 +245,7 @@ namespace Proiect1.Migrations
 
             modelBuilder.Entity("Proiect1.Models.Member", b =>
                 {
-                    b.Navigation("companieAeriana")
-                        .IsRequired();
+                    b.Navigation("CompaniiAeriene");
                 });
 
             modelBuilder.Entity("Proiect1.Models.Poarta", b =>

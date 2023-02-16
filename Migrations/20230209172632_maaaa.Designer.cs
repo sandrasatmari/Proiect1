@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect1.Data;
 
@@ -11,13 +12,14 @@ using Proiect1.Data;
 namespace Proiect1.Migrations
 {
     [DbContext(typeof(Proiect1Context))]
-    partial class Proiect1ContextModelSnapshot : ModelSnapshot
+    [Migration("20230209172632_maaaa")]
+    partial class maaaa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -63,9 +65,6 @@ namespace Proiect1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MemberID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nume_Airline")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -75,10 +74,6 @@ namespace Proiect1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("MemberID")
-                        .IsUnique()
-                        .HasFilter("[MemberID] IS NOT NULL");
 
                     b.ToTable("CompanieAeriana");
                 });
@@ -104,35 +99,6 @@ namespace Proiect1.Migrations
                     b.HasIndex("ZborID");
 
                     b.ToTable("CompanieZbor");
-                });
-
-            modelBuilder.Entity("Proiect1.Models.Member", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("Adress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Member");
                 });
 
             modelBuilder.Entity("Proiect1.Models.Poarta", b =>
@@ -192,15 +158,6 @@ namespace Proiect1.Migrations
                     b.ToTable("Zbor");
                 });
 
-            modelBuilder.Entity("Proiect1.Models.CompanieAeriana", b =>
-                {
-                    b.HasOne("Proiect1.Models.Member", "Members")
-                        .WithOne("companieAeriana")
-                        .HasForeignKey("Proiect1.Models.CompanieAeriana", "MemberID");
-
-                    b.Navigation("Members");
-                });
-
             modelBuilder.Entity("Proiect1.Models.CompanieZbor", b =>
                 {
                     b.HasOne("Proiect1.Models.CompanieAeriana", "CompanieAeriana")
@@ -241,12 +198,6 @@ namespace Proiect1.Migrations
             modelBuilder.Entity("Proiect1.Models.CompanieAeriana", b =>
                 {
                     b.Navigation("CompaniiZbor");
-                });
-
-            modelBuilder.Entity("Proiect1.Models.Member", b =>
-                {
-                    b.Navigation("companieAeriana")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Proiect1.Models.Poarta", b =>

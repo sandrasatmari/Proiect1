@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Proiect1.Data;
 using Proiect1.Models;
+using Proiect1.Models.ViewModels;
 
 namespace Proiect1.Pages.Aeroporturi
 {
@@ -19,13 +14,25 @@ namespace Proiect1.Pages.Aeroporturi
             _context = context;
         }
 
-        public IList<Aeroport> Aeroport { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        public IList<Aeroport> Aeroport { get; set; } = default!;
+        public AeroportIndexData AeroportData { get; set; }
+        public int AeroportID { get; set; }
+        public int ZborID { get; set; }
+        public async Task OnGetAsync(int? id, int? zborID)
         {
-            if (_context.Aeroport != null)
+            AeroportData = new AeroportIndexData();
+            AeroportData.Aeroporturi = await _context.Aeroport
+                .Include(i => i.Zboruri)
+                    .ThenInclude(c => c.Poarta)
+                .OrderBy(i => i.Nume_Aeroport)
+                .ToListAsync();
+
+            if (id != null)
             {
-                Aeroport = await _context.Aeroport.ToListAsync();
+                AeroportID = id.Value;
+                Aeroport aeroport = AeroportData.Aeroporturi
+                .Where(i => i.ID == id.Value).Single();
+                AeroportData.Zboruri = aeroport.Zboruri;
             }
         }
     }

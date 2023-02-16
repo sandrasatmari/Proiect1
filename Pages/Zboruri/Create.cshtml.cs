@@ -24,6 +24,7 @@ namespace Proiect1.Pages.Zboruri
         public IActionResult OnGet()
         {
             ViewData["Destinatie"] = new SelectList(_context.Set<Aeroport>(), "ID", "Nume_Aeroport");
+            ViewData["PoartaID"] = new SelectList(_context.Set<Poarta>(), "ID", "Numar");
             var zbor = new Zbor();
             zbor.CompaniiZbor = new List<CompanieZbor>();
             PopulateAssignedAirlineData(_context, zbor);

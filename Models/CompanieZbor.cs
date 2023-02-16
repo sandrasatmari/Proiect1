@@ -6,7 +6,7 @@
         public int? ZborID { get; set; }
         public Zbor? Zbor { get; set; }
 
-        public int? CompanieAerianaID { get; set; }
+        public int CompanieAerianaID { get; set; }
         public CompanieAeriana? CompanieAeriana { get; set; }
 
     }

@@ -14,6 +14,8 @@ namespace Proiect1.Models
 
         public string EmailContact { get; set; }
         public ICollection<CompanieZbor>? CompaniiZbor { get; set; }
+        public int? MemberID { get; set; }
+        public Member? Members { get; set; }
 
 
     }

@@ -33,6 +33,7 @@ namespace Proiect1.Pages.Zboruri
             Zbor = await _context.Zbor
                 .Include(b => b.Aeroport)
                 .Include(b => b.CompaniiZbor).ThenInclude(b => b.CompanieAeriana)
+                .Include(p => p.Poarta)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
 
@@ -45,13 +46,13 @@ namespace Proiect1.Pages.Zboruri
 
             //Zbor = zbor;
             ViewData["Destinatie"] = new SelectList(_context.Set<Aeroport>(), "ID", "Nume_Aeroport");
+            ViewData["PoartaID"] = new SelectList(_context.Set<Poarta>(), "ID", "Numar");
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int? id, string[]
-selectedAirlines)
+        public async Task<IActionResult> OnPostAsync(int? id, string[] selectedAirlines)
         {
             if (id == null)
             {
@@ -59,6 +60,7 @@ selectedAirlines)
             }
             var zborToUpdate = await _context.Zbor
             .Include(i => i.Aeroport)
+            .Include(i => i.Poarta)
             .Include(i => i.CompaniiZbor)
             .ThenInclude(i => i.CompanieAeriana)
             .FirstOrDefaultAsync(s => s.Id == id);
@@ -66,12 +68,12 @@ selectedAirlines)
             {
                 return NotFound();
             }
-            
+
             if (await TryUpdateModelAsync<Zbor>(
             zborToUpdate,
             "Zbor",
             i => i.DataPlecare, i => i.NrLocuri,
-            i => i.NrLocuriRezervate, i => i.Poarta, i => i.OreIntarziere, i => i.Destinatie))
+            i => i.NrLocuriRezervate, i => i.PoartaID, i => i.OreIntarziere, i => i.Destinatie))
             {
                 UpdateCompaniiZbor(_context, selectedAirlines, zborToUpdate);
                 await _context.SaveChangesAsync();
