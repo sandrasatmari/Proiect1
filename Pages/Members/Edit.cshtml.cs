@@ -35,7 +35,7 @@ namespace Proiect1.Pages.Members
             {
                 return NotFound();
             }
-            ViewData["companieAeriana"] = new SelectList(_context.Set<CompanieAeriana>(), "ID", "Nume_Airline");
+            ViewData["CompanieAerianaID"] = new SelectList(_context.Set<CompanieAeriana>(), "ID", "Nume_Airline");
             //Member = member;
             return Page();
         }

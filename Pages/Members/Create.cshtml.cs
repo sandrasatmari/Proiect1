@@ -21,7 +21,7 @@ namespace Proiect1.Pages.Members
 
         public IActionResult OnGet()
         {
-            ViewData["CompanieAeriana"] = new SelectList(_context.Set<CompanieAeriana>(), "ID", "Nume_Airline");
+            ViewData["CompanieAerianaID"] = new SelectList(_context.Set<CompanieAeriana>(), "ID", "Nume_Airline");
             return Page();
         }
 

@@ -19,7 +19,9 @@ namespace Proiect1.Models
                 return FirstName + " " + LastName;
             }
         }
-        public CompanieAeriana companieAeriana { get; set; }
-    //    public ICollection<CompanieAeriana>? CompaniiAeriene { get; set; }
+        //public CompanieAeriana companieAeriana { get; set; }
+
+        public int? CompanieAerianaID { get; set; }
+        public CompanieAeriana? CompanieAeriana { get; set; }
     }
 }

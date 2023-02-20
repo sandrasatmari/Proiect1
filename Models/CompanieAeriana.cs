@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Net.Mail;
-using System.Xml.Linq;
 
 namespace Proiect1.Models
 {
@@ -14,9 +12,8 @@ namespace Proiect1.Models
 
         public string EmailContact { get; set; }
         public ICollection<CompanieZbor>? CompaniiZbor { get; set; }
-        public int? MemberID { get; set; }
-        public Member? Members { get; set; }
-
+        
+        public ICollection<Member>? Members { get; set; }
 
     }
 }

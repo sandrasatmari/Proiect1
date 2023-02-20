@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Proiect1.Data;
 using Proiect1.Models;
 
 namespace Proiect1.Pages.Members
@@ -25,7 +19,9 @@ namespace Proiect1.Pages.Members
         {
             if (_context.Member != null)
             {
-                Member = await _context.Member.ToListAsync();
+                Member = await _context.Member
+                    .Include(b => b.CompanieAeriana)
+                    .ToListAsync();
             }
         }
     }
