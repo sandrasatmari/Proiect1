@@ -72,14 +72,14 @@
                     @{
                         foreach (var b in Model.AeroportData.Zboruri)
                         {
-                            if(b.Destinatie == item.ID)
+                            if (b.Destinatie == item.ID)
                             {
-                                @b.NrLocuriRezervate @: @b.Poarta.Numar @b.DataPlecare
+                                @b.NrLocuriRezervate @b.DataPlecare
                                 <br />
 
                             }
 
-                            
+
                         }
                     }
                 </td>

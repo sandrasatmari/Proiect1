@@ -24,6 +24,6 @@ namespace Proiect1.Data
 
         public DbSet<Proiect1.Models.Poarta> Poarta { get; set; }
 
-        public DbSet<Proiect1.Models.Member> Member { get; set; }
+        //public DbSet<Proiect1.Models.Member> Member { get; set; }
     }
 }

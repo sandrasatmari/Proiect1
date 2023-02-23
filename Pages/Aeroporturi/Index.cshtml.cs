@@ -23,7 +23,7 @@ namespace Proiect1.Pages.Aeroporturi
             AeroportData = new AeroportIndexData();
             AeroportData.Aeroporturi = await _context.Aeroport
                 .Include(i => i.Zboruri)
-                    .ThenInclude(c => c.Poarta)
+                .ThenInclude(c => c.Poarta)
                 .OrderBy(i => i.Nume_Aeroport)
                 .ToListAsync();
 
@@ -31,7 +31,7 @@ namespace Proiect1.Pages.Aeroporturi
             {
                 AeroportID = id.Value;
                 Aeroport aeroport = AeroportData.Aeroporturi
-                .Where(i => i.ID == id.Value).Single();
+                    .Where(i => i.ID == id.Value).Single();
                 AeroportData.Zboruri = aeroport.Zboruri;
             }
         }
